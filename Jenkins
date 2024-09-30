@@ -4,24 +4,26 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from Git
-                git url: 'https://github.com/Pranshu-Dev01/my-python-app.git' 
+                git url: 'https://github.com/Pranshu-Dev01/my-python-app.git'
             }
         }
         stage('Setup Environment') {
             steps {
                 echo "Creating virtual environment..."
-                bat 'C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Python 3.12\\python.exe -m venv venv'  // Use double backslashes
+                bat '"C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Python 3.12\\python.exe" -m venv venv'  // Enclose paths with spaces in double quotes
+                
                 echo "Activating virtual environment..."
-                bat 'call venv\\Scripts\\activate.bat'  // This line is fine as is
+                bat 'call venv\\Scripts\\activate.bat'
+                
                 echo "Installing dependencies..."
-                bat 'C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Python 3.12\\Scripts\\pip.exe install -r requirements.txt'  // Use double backslashes
+                bat '"C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Python 3.12\\Scripts\\pip.exe" install -r requirements.txt'
             }
         }
         stage('Run Tests') {
             steps {
                 echo "Running tests..."
                 // Add your testing commands here, for example:
-                // bat 'pytest'
+                // bat 'pytest' or 'python -m unittest discover' depending on your setup
             }
         }
         stage('Deploy') {
