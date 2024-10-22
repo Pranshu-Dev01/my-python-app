@@ -3,28 +3,27 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code from Git
-                git url: 'https://github.com/Pranshu-Dev01/my-python-app.git' 
+                // Checkout code from Git (Replace with your actual Git URL)
+                git url: 'https://github.com/Pranshu-Dev01/my-python-app.git'
             }
         }
         stage('Setup Environment') {
             steps {
                 echo "Creating virtual environment..."
-                // Use short path format (C:\Progra~1\ for "Program Files", for example) or escape spaces properly
-                bat '"C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\Windows\\StartM~1\\Programs\\Python~1\\python.exe" -m venv venv'
+                // Replace with the correct Python executable path
+                bat 'C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe -m venv venv'
                 
                 echo "Activating virtual environment..."
                 bat 'call venv\\Scripts\\activate.bat'
-
+                
                 echo "Installing dependencies..."
-                bat '"C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\Windows\\StartM~1\\Programs\\Python~1\\Scripts\\pip.exe" install -r requirements.txt'
+                bat 'venv\\Scripts\\pip.exe install -r requirements.txt'
             }
         }
         stage('Run Tests') {
             steps {
                 echo "Running tests..."
-                // Add your testing commands here
-                // e.g. bat 'pytest'
+                bat 'venv\\Scripts\\python.exe -m pytest'
             }
         }
         stage('Deploy') {
